@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Snake Game Settings</title>
+    <style>
+        /* CSS styles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #settingsMenu {
+            width: 300px;
+            height: auto;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-item {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .selectable {
+            cursor: pointer;
+        }
+
+        .selected {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        class Menu {
+            constructor() {
+                this.menuElement = document.createElement('div');
+                this.menuElement.id = 'settingsMenu';
+                this.selectableItems = [];
+                this.currentSelection = 0;
+            }
+
+            setTitle(title) {
+                const titleElement = document.createElement('div');
+                titleElement.className = 'menu-item bold';
+                titleElement.textContent = title;
+                this.menuElement.appendChild(titleElement);
+            }
+
+            addBoldHeader(header) {
+                const headerElement = document.createElement('div');
+                headerElement.className = 'menu-item bold';
+                headerElement.textContent = header;
+                this.menuElement.appendChild(headerElement);
+            }
+
+            addChoice(label, options) {
+                const choiceElement = document.createElement('div');
+                this.selectableItems.push(choiceElement);
+                this.menuElement.appendChild(choiceElement);
+                choiceElement.className = 'menu-item selectable';
+                choiceElement.label = label;
+                choiceElement.options = options;
+
+                choiceElement.optionIndex = 0;
+                choiceElement.textContent = `${choiceElement.label}: ${options[choiceElement.optionIndex]}`;
+            }
+
+            addSelectableEntry(label, callback) {
+                const entryElement = document.createElement('div');
+                entryElement.className = 'menu-item selectable';
+                entryElement.textContent = label;
+                this.selectableItems.push(entryElement);
+                this.menuElement.appendChild(entryElement);
+                entryElement.callback = callback; // Add a callback property to the element
+            }
+
+            display() {
+                document.body.appendChild(this.menuElement);
+                window.addEventListener('keydown', this.handleArrowKeys.bind(this));
+                this.updateSelection(0);
+            }
+
+            updateSelection(direction) {
+                const itemCount = this.selectableItems.length;
+                this.currentSelection = (this.currentSelection + direction + itemCount) % itemCount;
+
+                this.selectableItems.forEach((item, index) => {
+                    const isSelected = index === this.currentSelection;
+                    item.classList.toggle('selected', isSelected);
+                    // if the item has options, and is NOT selected, remove the beginning and ending arrows
+                    if (item.options && !isSelected) {
+                        item.textContent = item.textContent.replace('< ', '').replace(' >', '');
+                    } else if (item.options && isSelected) {
+                        item.textContent = '< ' + item.textContent + ' >';
+                    }
+                    
+                });
+            }
+
+            getSelectedItem() {
+                return this.selectableItems[this.currentSelection];
+            }   
+
+            handleArrowKeys(event) {
+                switch (event.key) {
+                    case 'ArrowUp':
+                        this.updateSelection(-1);
+                        break;
+                    case 'ArrowDown':
+                        this.updateSelection(+1);
+                        break;
+                    case 'ArrowLeft':
+                        this.cycleChoice(-1);
+                        break;
+                    case 'ArrowRight':
+                        this.cycleChoice(1);
+                        break;
+                    case 'Enter':
+                        if (this.getSelectedItem().callback) {
+                            this.getSelectedItem().callback();
+                        }
+                        break;
+                }
+            }
+
+            cycleChoice(direction) {
+                var choiceElement = this.getSelectedItem()
+                if (choiceElement.options) {
+                choiceElement.optionIndex = (choiceElement.optionIndex + direction + choiceElement.options.length) % choiceElement.options.length;
+                choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
+                }
+
+            }
+        }
+
+        function startNewGame() {
+            console.log('Starting new game...');
+            // Add game start logic here
+        }
+
+        // Creating and displaying the menu
+        const menu = new Menu();
+        menu.setTitle('Snake Game');
+        menu.addBoldHeader('Top Score: 0');
+        menu.addChoice('Level', ['Easy', 'Medium', 'Hard']);
+        menu.addBoldHeader('Yi');
+        menu.addChoice('Level2', ['Easy2', 'Medium2', 'Hard2']);
+        menu.addSelectableEntry('New Game', startNewGame);
+        menu.display();
+    </script>
+</body>
+
+</html>
