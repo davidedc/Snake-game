@@ -112,6 +112,11 @@
                 this.updateSelection(0);
             }
 
+            dismiss() {
+                document.body.removeChild(document.querySelector('.overlay'));
+                window.removeEventListener('keydown', this.handleArrowKeys.bind(this));
+            }
+
             updateSelection(direction) {
                 const itemCount = this.selectableItems.length;
                 this.currentSelection = (this.currentSelection + direction + itemCount) % itemCount;
