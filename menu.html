@@ -4,7 +4,6 @@
 <head>
     <title>Snake Game Settings</title>
     <style>
-        /* CSS styles */
         body {
             margin: 0;
 
@@ -126,13 +125,13 @@
                     } else if (item.options && isSelected) {
                         item.textContent = '< ' + item.textContent + ' >';
                     }
-                    
+
                 });
             }
 
             getSelectedItem() {
                 return this.selectableItems[this.currentSelection];
-            }   
+            }
 
             handleArrowKeys(event) {
                 switch (event.key) {
@@ -159,8 +158,8 @@
             cycleChoice(direction) {
                 var choiceElement = this.getSelectedItem()
                 if (choiceElement.options) {
-                choiceElement.optionIndex = (choiceElement.optionIndex + direction + choiceElement.options.length) % choiceElement.options.length;
-                choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
+                    choiceElement.optionIndex = (choiceElement.optionIndex + direction + choiceElement.options.length) % choiceElement.options.length;
+                    choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
                 }
 
             }
