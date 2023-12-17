@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    
 
-    <title>Snake</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./menu.css" />
 
-  <body>
-    <div class="score">Score: <span>0</span></div>
-    <div class="grid"></div>    
-  </body>
 
-  <script src="./libs/Tone.min.14.8.49.js"></script>
-  <script src="./Cell.js"></script>
-  <script src="./Game.js"></script>
-  <script src="./Grid.js"></script>
-  <script src="./Sound.js"></script>
-  <script src="./Snake.js"></script>
-  <script src="./Food.js"></script>
-  <script src="./InputHandler.js"></script>
-  <script src="./SnakeDirection.js"></script>
+  <title>Snake</title>
+</head>
 
-  <script>
-    // Define the dimensions and cell size for the grid
-    const gridWidth = 25;
-    const gridHeight = 20;
-    const cellSize = 20;
-    const initialInterval = 200;
+<body>
+  <div class="score">Score: <span>0</span></div>
+  <div class="grid"></div>
+</body>
 
-    // Create the Game instance
-    const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
-    game.start();
-  </script>
+<script src="./libs/Tone.min.14.8.49.js"></script>
+<script src="./Cell.js"></script>
+<script src="./Game.js"></script>
+<script src="./Grid.js"></script>
+<script src="./Sound.js"></script>
+<script src="./Snake.js"></script>
+<script src="./Food.js"></script>
+<script src="./InputHandler.js"></script>
+<script src="./SnakeDirection.js"></script>
 
-  </html>
+<script src="./Menu.js"></script>
+
+<script>
+  // Define the dimensions and cell size for the grid
+  const gridWidth = 25;
+  const gridHeight = 20;
+  const cellSize = 20;
+  const initialInterval = 200;
+
+  // Create the Game instance
+  const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
+
+</script>
+
+</html>
