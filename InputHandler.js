@@ -1,12 +1,12 @@
 class InputHandler {
-    constructor(game) {
-        this.game = game;
-        this.initialize();
-    }
 
-    initialize() {
+    hookUpTo(thingToHookUpTo) {
         document.addEventListener('keydown', e => {
-            this.game.snake.changeDirection(e.key);
+            thingToHookUpTo.changeDirection(e.key);
         });
+    }
+    
+    unhook() {
+        document.removeEventListener('keydown', this.handleArrowKeys.bind(this));
     }
 }

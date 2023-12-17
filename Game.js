@@ -14,6 +14,7 @@ class Game {
   start() {
       this.reset();
       this.interval = setInterval(() => this.gameLoop(), this.intervalTime);
+      this.inputHandler.hookUpTo(this.snake);
   }
 
   stop() {

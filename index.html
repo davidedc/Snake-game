@@ -39,6 +39,24 @@
   // Create the Game instance
   const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
 
+  var menu = new Menu();
+
+  function startNewGame() {
+    menu.dismiss();
+    game.start();
+    // Add game start logic here
+  }
+
+  // Creating and displaying the menu
+  menu.setTitle('Snake Game');
+  menu.addTitleDividerLine();
+  menu.addBoldHeader('Top Score: 0');
+  menu.addChoice('Level', ['Easy', 'Medium', 'Hard']);
+  menu.addBoldHeader('Yi');
+  menu.addChoice('Level2', ['Easy2', 'Medium2', 'Hard2']);
+  menu.addSelectableEntry('New Game', startNewGame);
+  menu.display();
+
 </script>
 
 </html>
