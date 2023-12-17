@@ -48,7 +48,7 @@ class Snake {
         return false;
     }
 
-    changeDirection(newDirection) {
+    keyDown(newDirection) {
         const newDirectionMap = {
           'ArrowRight': SnakeDirection.RIGHT,
           'ArrowLeft': SnakeDirection.LEFT,

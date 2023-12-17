@@ -13,12 +13,24 @@ class Game {
 
   start() {
       this.reset();
-      this.interval = setInterval(() => this.gameLoop(), this.intervalTime);
-      this.inputHandler.hookUpTo(this.snake);
+      this.startGameLoop();
+      this.hookKeys();
+  }
+
+  hookKeys() {
+      this.inputHandler.hookUpTo(this, this.snake);
+  }
+
+  pauseGameLoop() {
+    clearInterval(this.interval);
+  }
+
+  startGameLoop() {
+    this.interval = setInterval(() => this.gameLoop(), this.intervalTime);
   }
 
   stop() {
-      clearInterval(this.interval);
+      this.pauseGameLoop();
       this.sound.play('gameOver');
   }
 
@@ -38,7 +50,7 @@ class Game {
     this.score = 0;
     this.updateScore();
 
-    clearInterval(this.interval);
+    this.pauseGameLoop();
 
     this.food.place(this.grid);
   }

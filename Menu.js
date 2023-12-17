@@ -4,6 +4,9 @@ class Menu {
         this.menuElement.id = 'settingsMenu';
         this.selectableItems = [];
         this.currentSelection = 0;
+        // if we don't remember this bound function, we won't be able to remove
+        // the event listener later
+        this.boundHandleArrowKeys = this.handleArrowKeys.bind(this);
     }
 
     setTitle(title) {
@@ -53,13 +56,13 @@ class Menu {
 
         // append to the overlay instead of the body
         document.querySelector('.overlay').appendChild(this.menuElement);
-        window.addEventListener('keydown', this.handleArrowKeys.bind(this));
+        window.addEventListener('keydown', this.boundHandleArrowKeys);
         this.updateSelection(0);
     }
 
     dismiss() {
         document.body.removeChild(document.querySelector('.overlay'));
-        window.removeEventListener('keydown', this.handleArrowKeys.bind(this));
+        window.removeEventListener('keydown', this.boundHandleArrowKeys);
     }
 
     updateSelection(direction) {
@@ -84,6 +87,7 @@ class Menu {
     }
 
     handleArrowKeys(event) {
+        //console.log("A menu handling the arrow keys");
         switch (event.key) {
             case 'ArrowUp':
                 this.updateSelection(-1);

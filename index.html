@@ -29,7 +29,31 @@
 
 <script src="./Menu.js"></script>
 
+<script src="./js/state-machine/GameState.js"></script>
+<script src="./js/state-machine/GameStateMachine.js"></script>
+
+<script src="./js/state-machine/game-states/GameOngoingState.js"></script>
+<script src="./js/state-machine/game-states/GameOptionsState.js"></script>
+<script src="./js/state-machine/game-states/GameOverState.js"></script>
+<script src="./js/state-machine/game-states/GamePausedState.js"></script>
+<script src="./js/state-machine/game-states/MainMenuState.js"></script>
+<script src="./js/state-machine/game-states/SplashScreenState.js"></script>
+
 <script>
+
+  const gameStateMachine = new GameStateMachine();
+
+  // Define transitions
+  // gameStateMachine.addTransition(SplashScreenState, MainMenuState);
+  //gameStateMachine.addTransition(MainMenuState, GameOptionsState);
+  gameStateMachine.addTransition(MainMenuState, GameOngoingState);
+  gameStateMachine.addTransition(GameOngoingState, GamePausedState);
+  //gameStateMachine.addTransition(GameOngoingState, GameOverState);
+  gameStateMachine.addTransition(GamePausedState, GameOngoingState);
+  //gameStateMachine.addTransition(GamePausedState, GameOverState);
+  //gameStateMachine.addTransition(GameOverState, MainMenuState);
+
+
   // Define the dimensions and cell size for the grid
   const gridWidth = 25;
   const gridHeight = 20;
@@ -39,23 +63,7 @@
   // Create the Game instance
   const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
 
-  var menu = new Menu();
-
-  function startNewGame() {
-    menu.dismiss();
-    game.start();
-    // Add game start logic here
-  }
-
-  // Creating and displaying the menu
-  menu.setTitle('Snake Game');
-  menu.addTitleDividerLine();
-  menu.addBoldHeader('Top Score: 0');
-  menu.addChoice('Level', ['Easy', 'Medium', 'Hard']);
-  menu.addBoldHeader('Yi');
-  menu.addChoice('Level2', ['Easy2', 'Medium2', 'Hard2']);
-  menu.addSelectableEntry('New Game', startNewGame);
-  menu.display();
+  gameStateMachine.changeState(MainMenuState);
 
 </script>
 

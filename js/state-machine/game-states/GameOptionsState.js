@@ -1,0 +1,3 @@
+class GameOptionsState extends GameState {
+    
+}
