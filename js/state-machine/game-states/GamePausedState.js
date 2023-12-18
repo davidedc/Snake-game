@@ -4,6 +4,7 @@ class GamePausedState extends GameState {
 
     static moveToNextStateToReStartGame(stateMachine) {
         //console.log("dismissing menu and restarting game...");
+        game.sound.play('pause');
         this.menu.dismiss();
         stateMachine.changeState(GameOngoingState);
         game.startGameLoop();
@@ -12,6 +13,7 @@ class GamePausedState extends GameState {
     static onEnter(stateMachine) {
         
         game.pauseGameLoop();
+        game.sound.play('pause');
 
         this.menu = new Menu();
 

@@ -7,6 +7,7 @@ class Sound {
             }).toDestination(),
             eat: new Tone.Synth({}).toDestination(),
             gameOver: new Tone.Synth({}).toDestination(),
+            pause: new Tone.Synth({ oscillator: {type: 'sine'}}).toDestination(),
             // other sounds can be added here
         };
 
@@ -14,7 +15,8 @@ class Sound {
         this.settings = {
             move: { duration: '8n' },
             eat: { notes: ['C4', 'E4', 'C5'], duration: '16n' },
-            gameOver: { notes: ['G4', 'F4', 'D4', 'C4', 'A3'], duration: '8n' }
+            gameOver: { notes: ['G4', 'F4', 'D4', 'C4', 'A3'], duration: '8n' },
+            pause: { notes: ['C5', 'C6'], duration: '8n' }
         };
     }
 
@@ -30,6 +32,10 @@ class Sound {
                 });
             } else if (type === 'move') {
                 sound.triggerAttackRelease(setting.duration);
+            } else if (type === 'pause') {
+                setting.notes.forEach((note, index) => {
+                    sound.triggerAttackRelease(note, setting.duration, Tone.now() + index * 0.05);
+                });
             }
             // Add more conditions for other sound types if necessary
         }
