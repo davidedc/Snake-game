@@ -25,13 +25,12 @@ class Game {
     clearInterval(this.interval);
   }
 
-  startGameLoop() {
-    this.interval = setInterval(() => this.gameLoop(), this.intervalTime);
+  stopGameLoop() {
+    clearInterval(this.interval);
   }
 
-  stop() {
-      this.pauseGameLoop();
-      this.sound.play('gameOver');
+  startGameLoop() {
+    this.interval = setInterval(() => this.gameLoop(), this.intervalTime);
   }
 
   reset() {
@@ -62,7 +61,8 @@ class Game {
   gameLoop() {
     if (this.snake.checkCollision()) {
         this.grid.shake();
-        this.stop();
+        this.stopGameLoop();
+        gameStateMachine.changeState(GameOverState);
         return;
     }
 

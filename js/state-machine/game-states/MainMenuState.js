@@ -13,14 +13,13 @@ class MainMenuState extends GameState {
 
         // Creating and displaying the menu
         this.menu.setTitle('Snake Game');
-        this.menu.addTitleDividerLine();
         this.menu.addBoldHeader('Top Score: 0');
+        this.menu.addTitleDividerLine();
         this.menu.addChoice('Level', ['Easy', 'Medium', 'Hard']);
-        this.menu.addBoldHeader('Yi');
-        this.menu.addChoice('Level2', ['Easy2', 'Medium2', 'Hard2']);
-        this.menu.addSelectableEntry('New Game', () => {
+        this.menu.addSelectableEntry('Start game', () => {
             this.moveToNextStateToStartGame(stateMachine); // Adjusted for static context
         });
+        this.menu.currentSelection = 1;
         this.menu.display();
         
     }

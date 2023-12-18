@@ -23,6 +23,13 @@ class Menu {
         this.menuElement.appendChild(headerElement);
     }
 
+    addLine(line) {
+        const headerElement = document.createElement('div');
+        headerElement.className = 'menu-item';
+        headerElement.textContent = line;
+        this.menuElement.appendChild(headerElement);
+    }
+
     addChoice(label, options) {
         const choiceElement = document.createElement('div');
         this.selectableItems.push(choiceElement);

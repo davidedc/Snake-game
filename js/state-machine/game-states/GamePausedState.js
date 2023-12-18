@@ -10,6 +10,12 @@ class GamePausedState extends GameState {
         game.startGameLoop();
     }
 
+    static moveToNextStateToResetGame(stateMachine) {
+        this.menu.dismiss();
+        stateMachine.changeState(MainMenuState);
+    }
+
+
     static onEnter(stateMachine) {
         
         game.pauseGameLoop();
@@ -20,9 +26,13 @@ class GamePausedState extends GameState {
         // Creating and displaying the menu
         this.menu.setTitle('Paused');
         this.menu.addTitleDividerLine();
+        this.menu.addSelectableEntry('Quit game', () => {
+            this.moveToNextStateToResetGame(stateMachine); // Adjusted for static context
+        });
         this.menu.addSelectableEntry('Continue', () => {
             this.moveToNextStateToReStartGame(stateMachine); // Adjusted for static context
         });
+        this.menu.currentSelection = 1;
         this.menu.display();
         
     }

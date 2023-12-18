@@ -48,10 +48,10 @@
   //gameStateMachine.addTransition(MainMenuState, GameOptionsState);
   gameStateMachine.addTransition(MainMenuState, GameOngoingState);
   gameStateMachine.addTransition(GameOngoingState, GamePausedState);
-  //gameStateMachine.addTransition(GameOngoingState, GameOverState);
+  gameStateMachine.addTransition(GameOngoingState, GameOverState);
   gameStateMachine.addTransition(GamePausedState, GameOngoingState);
-  //gameStateMachine.addTransition(GamePausedState, GameOverState);
-  //gameStateMachine.addTransition(GameOverState, MainMenuState);
+  gameStateMachine.addTransition(GamePausedState, MainMenuState);
+  gameStateMachine.addTransition(GameOverState, MainMenuState);
 
 
   // Define the dimensions and cell size for the grid
