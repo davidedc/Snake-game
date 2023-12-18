@@ -3,9 +3,9 @@ class InputHandler {
     hookUpTo(game, thingToHookUpTo) {
         //console.log('hooking up to', thingToHookUpTo);
         document.addEventListener('keydown', e => {
-            // if it's not the space
             // console.log(e.key + " " + gameStateMachine.currentState);
-            if (e.key !== ' ') {
+            // if it's an arrow key
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                 // if the game state is not paused
                 if (gameStateMachine.currentState !== GamePausedState) {
                     thingToHookUpTo.keyDown(e.key);
