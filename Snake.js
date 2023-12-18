@@ -56,8 +56,10 @@ class Snake {
           'ArrowDown': SnakeDirection.DOWN
         };
 
+        newDirection = newDirectionMap[newDirection];
+
         if (Math.abs(this.lastExecutedDirection) !== Math.abs(newDirection)) {
-            this.direction = newDirectionMap[newDirection];
+            this.direction = newDirection;
         }
     }
 }
