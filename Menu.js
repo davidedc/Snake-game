@@ -39,7 +39,7 @@ class Menu {
         choiceElement.options = options;
 
         choiceElement.optionIndex = 0;
-        choiceElement.textContent = `${choiceElement.label}: ${options[choiceElement.optionIndex]}`;
+        choiceElement.textContent = `< ${choiceElement.label}: ${options[choiceElement.optionIndex]} >`;
     }
 
     addSelectableEntry(label, callback) {
@@ -79,12 +79,16 @@ class Menu {
         this.selectableItems.forEach((item, index) => {
             const isSelected = index === this.currentSelection;
             item.classList.toggle('selected', isSelected);
-            // if the item has options, and is NOT selected, remove the beginning and ending arrows
+
+            /*
+            // if the item has options, and it's selected, add the beginning and ending arrows
+            // otherwhise, remove them
             if (item.options && !isSelected) {
                 item.textContent = item.textContent.replace('< ', '').replace(' >', '');
             } else if (item.options && isSelected) {
                 item.textContent = '< ' + item.textContent + ' >';
             }
+            */
 
         });
     }
