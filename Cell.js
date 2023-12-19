@@ -48,30 +48,44 @@ class Cell {
         this.element.classList.add(type); // Add the new type as a class for styling
     }
 
+    _putEmoji(emojiImage) {
+        this.element.innerHTML = `<img src="${emojiImage.src}">`;
+    }
+
+    _removeEmoji() {
+        this.element.innerHTML = '';
+    }
+
     putFood() {
         this._putInCell(Cell.FOOD);
-        this.element.textContent = Food.randomFood(); // Example food icon
+        // random food returns an Image with a src attribute of something like 'green-apple.svg'
+        // ... use that file to show the food
+        const foodImage = Food.randomFood();
+        this._putEmoji(foodImage);
         this._removeFromEmptyCells();
     }
 
     putSnakeHead() {
         this._putInCell(Cell.SNAKE_HEAD);
         this._setRainbowColor();
-        this.element.textContent = '👀';
+        // put the image for the eyes in the cell
+        // the image is eyesEmojiImage
+        this._putEmoji(eyesEmojiImage);
+
         this._removeFromEmptyCells();
     }
 
     putSnakeNoHead() {
         this._putInCell(Cell.SNAKE_NO_HEAD);
         this._setRainbowColor();
-        this.element.textContent = '';
+        this._removeEmoji();
         this._removeFromEmptyCells();
     }
 
     reset() {
         this._putInCell(Cell.EMPTY);
         this.element.style.backgroundColor = '';
-        this.element.textContent = '';
+        this._removeEmoji();
         // Add the cell to the emptyCells array if it's not already there
         if (this.grid.emptyCells.indexOf(this) === -1) {
             this.grid.emptyCells.push(this);

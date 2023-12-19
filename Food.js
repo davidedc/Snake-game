@@ -13,8 +13,7 @@ class Food {
     }
     
     static randomFood() {
-        const foodItemsArray = ['🐁', '🍇', '🍉', '🍈', '🍓', '🍍', '🍌', '🥝', '🍏', '🍎', '🍔', '🍅', '🥚'];
-        return foodItemsArray[Math.floor(Math.random() * foodItemsArray.length)];
+        return foodEmojiImages[Math.floor(Math.random() * foodEmojiImages.length)];
     }
 
 }
