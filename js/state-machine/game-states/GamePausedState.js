@@ -29,9 +29,12 @@ class GamePausedState extends GameState {
         this.menu.addSelectableEntry('Quit game', () => {
             this.moveToNextStateToResetGame(stateMachine); // Adjusted for static context
         });
+        // the "continue" entry is the pre-selected one and only accepts the space key
+        // the reason is that when we use controllers, we ony want to unpause when
+        // "start" is pressed, not when the user presses one of the Y, K, B, A buttons
         this.menu.addSelectableEntry('Continue', () => {
             this.moveToNextStateToReStartGame(stateMachine); // Adjusted for static context
-        });
+        }, true);
         this.menu.currentSelection = 1;
         this.menu.display();
         

@@ -4,9 +4,6 @@ class Menu {
         this.menuElement.id = 'settingsMenu';
         this.selectableItems = [];
         this.currentSelection = 0;
-        // if we don't remember this bound function, we won't be able to remove
-        // the event listener later
-        this.boundHandleArrowKeys = this.handleArrowKeys.bind(this);
     }
 
     setTitle(title) {
@@ -42,12 +39,13 @@ class Menu {
         choiceElement.textContent = `< ${choiceElement.label}: ${options[choiceElement.optionIndex]} >`;
     }
 
-    addSelectableEntry(label, callback) {
+    addSelectableEntry(label, callback, onlyAcceptSpace = false) {
         const entryElement = document.createElement('div');
         entryElement.className = 'menu-item selectable';
         entryElement.textContent = label;
         this.selectableItems.push(entryElement);
         this.menuElement.appendChild(entryElement);
+        entryElement.onlyAcceptSpace = onlyAcceptSpace;
         entryElement.callback = callback; // Add a callback property to the element
     }
 
@@ -63,13 +61,11 @@ class Menu {
 
         // append to the overlay instead of the body
         document.querySelector('.overlay').appendChild(this.menuElement);
-        window.addEventListener('keydown', this.boundHandleArrowKeys);
         this.updateSelection(0);
     }
 
     dismiss() {
         document.body.removeChild(document.querySelector('.overlay'));
-        window.removeEventListener('keydown', this.boundHandleArrowKeys);
     }
 
     updateSelection(direction) {
@@ -97,9 +93,9 @@ class Menu {
         return this.selectableItems[this.currentSelection];
     }
 
-    handleArrowKeys(event) {
+    handleArrowKeys(key) {
         //console.log("A menu handling the arrow keys");
-        switch (event.key) {
+        switch (key) {
             case 'ArrowUp':
                 this.updateSelection(-1);
                 break;
@@ -112,7 +108,12 @@ class Menu {
             case 'ArrowRight':
                 this.cycleChoice(1);
                 break;
+            // enter OR space
             case 'Enter':
+                if (this.getSelectedItem().onlyAcceptSpace) {
+                    return;
+                }
+            case ' ':
                 if (this.getSelectedItem().callback) {
                     this.getSelectedItem().callback();
                 }

@@ -14,11 +14,6 @@ class Game {
   start() {
       this.reset();
       this.startGameLoop();
-      this.hookKeys();
-  }
-
-  hookKeys() {
-      this.inputHandler.hookUpTo(this, this.snake);
   }
 
   pauseGameLoop() {
