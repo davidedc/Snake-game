@@ -22,6 +22,8 @@ class InputHandler {
             0: 'Enter',
         };
 
+        this.previousButtonStates = new Array(16).fill(false);
+
         window.addEventListener("gamepadconnected", e => {
             console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
                         e.gamepad.index, e.gamepad.id,
@@ -63,10 +65,17 @@ class InputHandler {
         const pollGamepad = () => {
             if (this.gamepad) {
                 this.gamepad.buttons.forEach((button, index) => {
-                    if (button.pressed && this.controllerMapping[index]) {
+                    const isCurrentlyPressed = button.pressed;
+                    const wasPreviouslyPressed = this.previousButtonStates[index];
+
+                    // Check if the button was not pressed before and is pressed now
+                    if (!wasPreviouslyPressed && isCurrentlyPressed && this.controllerMapping[index]) {
                         let mappedKey = this.controllerMapping[index];
                         this.dispatchInputEvents(mappedKey);
                     }
+
+                    // Update the previous state
+                    this.previousButtonStates[index] = isCurrentlyPressed;
                 });
             }
             requestAnimationFrame(pollGamepad);
