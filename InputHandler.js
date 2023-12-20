@@ -1,6 +1,5 @@
 class InputHandler {
     constructor() {
-        this.gamepad = null;
 
         // Mapping controller buttons to game actions
         this.controllerMapping = {
@@ -25,16 +24,19 @@ class InputHandler {
         this.previousButtonStates = new Array(16).fill(false);
 
         window.addEventListener("gamepadconnected", e => {
-            console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-                        e.gamepad.index, e.gamepad.id,
-                        e.gamepad.buttons.length, e.gamepad.axes.length);
-            this.gamepad = e.gamepad;
+            //console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+            //            e.gamepad.index, e.gamepad.id,
+            //            e.gamepad.buttons.length, e.gamepad.axes.length);
+            // set the   <div class="debug">Debug: <span>0</span></div>
+            // to show the gamepad id
+            document.querySelector('.debug span').textContent = "controller: " + e.gamepad.id;
+
         });
 
         window.addEventListener("gamepaddisconnected", e => {
-            console.log("Gamepad disconnected from index %d: %s",
-                        e.gamepad.index, e.gamepad.id);
-            this.gamepad = null;
+            //console.log("Gamepad disconnected from index %d: %s",
+            //            e.gamepad.index, e.gamepad.id);
+            this.previousButtonStates.fill(false);
         });
 
         this.attachInputs();
@@ -63,8 +65,16 @@ class InputHandler {
 
         // Polling the gamepad state
         const pollGamepad = () => {
-            if (this.gamepad) {
-                this.gamepad.buttons.forEach((button, index) => {
+            // Use navigator.getGamepads() to get the current state
+            const gamepads = navigator.getGamepads();
+            if (gamepads[0]) {  // assuming the first gamepad is the one we want to use
+                // add to the four arrow buttons pressed value to the debug span
+                document.querySelector('.debug span').textContent = "controller: " + gamepads[0].id + " " +
+                    gamepads[0].buttons[12].pressed + " " +
+                    gamepads[0].buttons[13].pressed + " " +
+                    gamepads[0].buttons[14].pressed + " " +
+                    gamepads[0].buttons[15].pressed;
+                gamepads[0].buttons.forEach((button, index) => {
                     const isCurrentlyPressed = button.pressed;
                     const wasPreviouslyPressed = this.previousButtonStates[index];
 
@@ -80,7 +90,7 @@ class InputHandler {
             }
             requestAnimationFrame(pollGamepad);
         };
-
         pollGamepad(); // Start polling
+
     }
 }

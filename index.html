@@ -13,7 +13,8 @@
 </head>
 
 <body>
-  <div class="score">Score: <span>0</span> build: 4</div>
+  <div class="score">Score: <span>0</span> build: 5</div>
+  <div class="debug">Debug: <span>-</span></div>
   <div class="grid"></div>
 </body>
 
@@ -64,6 +65,9 @@
 
   // Create the Game instance
   const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
+
+  // add to the debug div that we are starting the game
+  document.querySelector('.debug span').textContent = 'Starting the game...';
 
   gameStateMachine.changeState(MainMenuState);
 
