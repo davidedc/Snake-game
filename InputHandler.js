@@ -29,7 +29,7 @@ class InputHandler {
             //            e.gamepad.buttons.length, e.gamepad.axes.length);
             // set the   <div class="debug">Debug: <span>0</span></div>
             // to show the gamepad id
-            document.querySelector('.debug span').textContent = "controller: " + e.gamepad.id;
+            // document.querySelector('.debug span').textContent = "controller: " + e.gamepad.id;
 
         });
 
@@ -69,11 +69,13 @@ class InputHandler {
             const gamepads = navigator.getGamepads();
             if (gamepads[0]) {  // assuming the first gamepad is the one we want to use
                 // add to the four arrow buttons pressed value to the debug span
+                /*
                 document.querySelector('.debug span').textContent = "controller: " + gamepads[0].id + " " +
                     gamepads[0].buttons[12].pressed + " " +
                     gamepads[0].buttons[13].pressed + " " +
                     gamepads[0].buttons[14].pressed + " " +
                     gamepads[0].buttons[15].pressed;
+                */
                 gamepads[0].buttons.forEach((button, index) => {
                     const isCurrentlyPressed = button.pressed;
                     const wasPreviouslyPressed = this.previousButtonStates[index];
