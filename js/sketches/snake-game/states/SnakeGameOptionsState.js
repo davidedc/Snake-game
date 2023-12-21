@@ -1,0 +1,3 @@
+class SnakeGameOptionsState extends AppState {
+    
+}

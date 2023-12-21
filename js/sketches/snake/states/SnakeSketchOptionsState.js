@@ -1,3 +1,0 @@
-class SnakeSketchOptionsState extends AppState {
-    
-}

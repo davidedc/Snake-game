@@ -1,3 +1,0 @@
-class SnakeSketchSplashScreenState extends AppState {
-
-}

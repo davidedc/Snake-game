@@ -1,0 +1,3 @@
+class SnakeGameSplashScreenState extends AppState {
+
+}
