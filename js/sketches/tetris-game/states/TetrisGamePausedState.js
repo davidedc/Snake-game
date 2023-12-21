@@ -1,4 +1,4 @@
-class SnakeGamePausedState extends AppState {
+class TetrisGamePausedState extends AppState {
 
     static menu;
 
@@ -6,13 +6,14 @@ class SnakeGamePausedState extends AppState {
         //console.log("dismissing menu and restarting game...");
         game.sound.play('pause');
         this.menu.dismiss();
-        stateMachine.changeState(SnakeGamePlayingState);
-        game.startGameLoop();
+        stateMachine.changeState(TetrisGamePlayingState);
+        //game.startGameLoop();
     }
 
     static moveToNextStateToResetGame(stateMachine) {
         this.menu.dismiss();
-        stateMachine.changeState(SnakeGameMainMenuState);
+        resetPlayField();
+        stateMachine.changeState(TetrisGameMainMenuState);
     }
 
 

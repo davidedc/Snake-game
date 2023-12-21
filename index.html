@@ -13,9 +13,6 @@
 </head>
 
 <body>
-  <div class="score">Score: <span>0</span></div>
-  <!-- <div class="debug">Debug: <span>-</span></div> -->
-  <div class="grid"></div>
 </body>
 
 <script src="./libs/Tone.min.14.8.49.js"></script>
@@ -57,6 +54,15 @@
   gameStateMachine.addTransition(SnakeGameGameOverState, SnakeGameMainMenuState);
 
 
+  // start populating the body with what we need for the snake game
+  document.body.innerHTML = `
+    <div class="debug">
+      <span></span>
+    </div>
+    <div class="score">Score: <span>0</span></div>
+    <div class="grid"></div>
+  `;
+
   // Define the dimensions and cell size for the grid
   const gridWidth = 25;
   const gridHeight = 20;
@@ -64,7 +70,7 @@
   const initialInterval = 200;
 
   // Create the SnakeGame instance
-  const game = new SnakeGame(gridWidth, gridHeight, cellSize, initialInterval);
+  var game = new SnakeGame(gridWidth, gridHeight, cellSize, initialInterval);
 
   // add to the debug div that we are starting the game
   //document.querySelector('.debug span').textContent = 'Starting the game...';

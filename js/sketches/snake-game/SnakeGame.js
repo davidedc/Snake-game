@@ -91,4 +91,8 @@ class SnakeGame {
     this.updateScore();
   }
 
+  keyDown(newDirection) {
+    this.snake.keyDown(newDirection);
+  }
+
 }

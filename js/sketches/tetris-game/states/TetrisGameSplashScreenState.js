@@ -1,0 +1,3 @@
+class TetrisGameSplashScreenState extends AppState {
+
+}

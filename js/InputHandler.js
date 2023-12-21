@@ -45,15 +45,20 @@ class InputHandler {
     dispatchInputEvents(key) {
         // if game is running then we proces the space to pause the game
         // otherwise we let the menu handle the space to select an option
-        if (key === ' ' && gameStateMachine.currentState === SnakeGamePlayingState) {
-            gameStateMachine.changeState(SnakeGamePausedState);
+        if (key === ' ' && gameStateMachine.currentState && (gameStateMachine.currentState === SnakeGamePlayingState || gameStateMachine.currentState === TetrisGamePlayingState) ) {
+            if (gameStateMachine.currentState === SnakeGamePlayingState) {
+                gameStateMachine.changeState(SnakeGamePausedState);
+            }
+            else {
+                gameStateMachine.changeState(TetrisGamePausedState);
+            }
         }
-        else if (gameStateMachine.currentState.menu) {
+        else if (gameStateMachine.currentState && gameStateMachine.currentState.menu) {
             gameStateMachine.currentState.menu.handleArrowKeys(key);
         }
         else if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
-            if (gameStateMachine.currentState !== SnakeGamePausedState) {
-                game.snake.keyDown(key);
+            if (!gameStateMachine.currentState || (gameStateMachine.currentState !== SnakeGamePausedState || gameStateMachine.currentState !== TetrisGamePausedState) ) {
+                game.keyDown(key);
             }
         }
     }
