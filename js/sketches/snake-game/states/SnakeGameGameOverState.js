@@ -6,6 +6,11 @@ class SnakeGameGameOverState extends AppState {
         stateMachine.changeState(SnakeGameMainMenuState);
     }
 
+    static moveToNextStateQuitGame(stateMachine) {
+        this.menu.dismiss();
+        stateMachine.changeState(TopLevelMenuState);
+    }
+
     static showGameOverMenu(stateMachine) {
         this.menu = new Menu();
 
@@ -13,9 +18,13 @@ class SnakeGameGameOverState extends AppState {
         this.menu.setTitle('Game Over');
         this.menu.addTitleDividerLine();
         this.menu.addLine("Score: " + game.score);
+        this.menu.addSelectableEntry('Quit game', () => {
+            this.moveToNextStateQuitGame(stateMachine); // Adjusted for static context
+        });
         this.menu.addSelectableEntry('Play again', () => {
             this.moveToNextStateToReStartGame(stateMachine); // Adjusted for static context
         });
+        this.menu.currentSelection = 1;
         this.menu.display();
     }
 

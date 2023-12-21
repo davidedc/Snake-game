@@ -6,9 +6,6 @@ class SnakeGame {
     this.cellSize = cellSize;
     this.intervalTime = intervalTime;
     this.scoreDisplay = document.querySelector(".score span");    
-
-    // Create the InputHandler instance to handle keyboard input
-    this.inputHandler = new InputHandler(this);
   }
 
   setIntervalTime(intervalTime) {
@@ -46,7 +43,7 @@ class SnakeGame {
     SnakeDirection.DOWN = this.gridWidth;
 
     // Create instances of the Grid, Snake, Food, and Sound classes
-    this.grid = new Grid(gridWidth, gridHeight, cellSize);
+    this.grid = new Grid(this.gridWidth, this.gridHeight, this.cellSize);
     this.snake = new Snake(this.grid);
     this.food = new Food();
     this.sound = new Sound();
