@@ -1,9 +1,9 @@
-class GameOverState extends GameState {
+class SnakeSketchGameOverState extends AppState {
     static menu;
 
     static moveToNextStateToReStartGame(stateMachine) {
         this.menu.dismiss();
-        stateMachine.changeState(MainMenuState);
+        stateMachine.changeState(SnakeSketchMainMenuState);
     }
 
     static showGameOverMenu(stateMachine) {

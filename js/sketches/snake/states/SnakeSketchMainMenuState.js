@@ -1,10 +1,10 @@
-class MainMenuState extends GameState {
+class SnakeSketchMainMenuState extends AppState {
 
     static menu;
 
     static moveToNextStateToStartGame(stateMachine) {
         // Implementation to move to the next state
-        stateMachine.changeState(GameOngoingState, this.menu); // Assuming stateMachine is properly defined
+        stateMachine.changeState(SnakeSketchPlayingState, this.menu); // Assuming stateMachine is properly defined
     }
 
     static onEnter(stateMachine) {

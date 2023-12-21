@@ -45,14 +45,14 @@ class InputHandler {
     dispatchInputEvents(key) {
         // if game is running then we proces the space to pause the game
         // otherwise we let the menu handle the space to select an option
-        if (key === ' ' && gameStateMachine.currentState === GameOngoingState) {
-            gameStateMachine.changeState(GamePausedState);
+        if (key === ' ' && gameStateMachine.currentState === SnakeSketchPlayingState) {
+            gameStateMachine.changeState(SnakeSketchPausedState);
         }
         else if (gameStateMachine.currentState.menu) {
             gameStateMachine.currentState.menu.handleArrowKeys(key);
         }
         else if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
-            if (gameStateMachine.currentState !== GamePausedState) {
+            if (gameStateMachine.currentState !== SnakeSketchPausedState) {
                 game.snake.keyDown(key);
             }
         }

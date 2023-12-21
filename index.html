@@ -19,42 +19,42 @@
 </body>
 
 <script src="./libs/Tone.min.14.8.49.js"></script>
-<script src="./Cell.js"></script>
-<script src="./Game.js"></script>
-<script src="./Grid.js"></script>
-<script src="./Sound.js"></script>
-<script src="./Snake.js"></script>
-<script src="./Food.js"></script>
-<script src="./InputHandler.js"></script>
-<script src="./SnakeDirection.js"></script>
+<script src="./js/sketches/snake/Cell.js"></script>
+<script src="./js/sketches/snake/SnakeSketch.js"></script>
+<script src="./js/sketches/snake/Grid.js"></script>
+<script src="./js/Sound.js"></script>
+<script src="./js/sketches/snake/Snake.js"></script>
+<script src="./js/sketches/snake/Food.js"></script>
+<script src="./js/InputHandler.js"></script>
+<script src="./js/sketches/snake/SnakeDirection.js"></script>
 
-<script src="./Menu.js"></script>
+<script src="./js/Menu.js"></script>
 
-<script src="./js/state-machine/GameState.js"></script>
-<script src="./js/state-machine/GameStateMachine.js"></script>
+<script src="./js/state-machine/AppState.js"></script>
+<script src="./js/state-machine/AppStateMachine.js"></script>
 
-<script src="./js/state-machine/game-states/GameOngoingState.js"></script>
-<script src="./js/state-machine/game-states/GameOptionsState.js"></script>
-<script src="./js/state-machine/game-states/GameOverState.js"></script>
-<script src="./js/state-machine/game-states/GamePausedState.js"></script>
-<script src="./js/state-machine/game-states/MainMenuState.js"></script>
-<script src="./js/state-machine/game-states/SplashScreenState.js"></script>
-<script src="./js/preload-emoji-svgs.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchPlayingState.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchOptionsState.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchGameOverState.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchPausedState.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchMainMenuState.js"></script>
+<script src="./js/sketches/snake/states/SnakeSketchSplashScreenState.js"></script>
+<script src="./js/sketches/snake/preload-emoji-svgs.js"></script>
 
 
 <script>
 
-  const gameStateMachine = new GameStateMachine();
+  const gameStateMachine = new AppStateMachine();
 
   // Define transitions
-  // gameStateMachine.addTransition(SplashScreenState, MainMenuState);
-  //gameStateMachine.addTransition(MainMenuState, GameOptionsState);
-  gameStateMachine.addTransition(MainMenuState, GameOngoingState);
-  gameStateMachine.addTransition(GameOngoingState, GamePausedState);
-  gameStateMachine.addTransition(GameOngoingState, GameOverState);
-  gameStateMachine.addTransition(GamePausedState, GameOngoingState);
-  gameStateMachine.addTransition(GamePausedState, MainMenuState);
-  gameStateMachine.addTransition(GameOverState, MainMenuState);
+  // gameStateMachine.addTransition(SnakeSketchSplashScreenState, SnakeSketchMainMenuState);
+  //gameStateMachine.addTransition(SnakeSketchMainMenuState, SnakeSketchOptionsState);
+  gameStateMachine.addTransition(SnakeSketchMainMenuState, SnakeSketchPlayingState);
+  gameStateMachine.addTransition(SnakeSketchPlayingState, SnakeSketchPausedState);
+  gameStateMachine.addTransition(SnakeSketchPlayingState, SnakeSketchGameOverState);
+  gameStateMachine.addTransition(SnakeSketchPausedState, SnakeSketchPlayingState);
+  gameStateMachine.addTransition(SnakeSketchPausedState, SnakeSketchMainMenuState);
+  gameStateMachine.addTransition(SnakeSketchGameOverState, SnakeSketchMainMenuState);
 
 
   // Define the dimensions and cell size for the grid
@@ -63,13 +63,13 @@
   const cellSize = 20;
   const initialInterval = 200;
 
-  // Create the Game instance
-  const game = new Game(gridWidth, gridHeight, cellSize, initialInterval);
+  // Create the SnakeSketch instance
+  const game = new SnakeSketch(gridWidth, gridHeight, cellSize, initialInterval);
 
   // add to the debug div that we are starting the game
   document.querySelector('.debug span').textContent = 'Starting the game...';
 
-  gameStateMachine.changeState(MainMenuState);
+  gameStateMachine.changeState(SnakeSketchMainMenuState);
 
 
   navigator.getBattery().then((battery) => {

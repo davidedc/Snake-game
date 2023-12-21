@@ -1,4 +1,4 @@
-class GameState {
+class AppState {
     static onEnter(stateMachine) {
         console.log(`Entering state: ${this.name}`);
         // Additional code for entering the state

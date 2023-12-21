@@ -1,3 +1,0 @@
-class SplashScreenState extends GameState {
-
-}

@@ -1,4 +1,4 @@
-class GameOngoingState extends GameState {
+class SnakeSketchPlayingState extends AppState {
 
     static onEnter(stateMachine) {
     }

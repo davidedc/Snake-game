@@ -1,4 +1,4 @@
-class Game {
+class SnakeSketch {
 
   constructor(gridWidth, gridHeight, cellSize, intervalTime) {
     this.gridWidth = gridWidth;
@@ -57,7 +57,7 @@ class Game {
     if (this.snake.checkCollision()) {
         this.grid.shake();
         this.stopGameLoop();
-        gameStateMachine.changeState(GameOverState);
+        gameStateMachine.changeState(SnakeSketchGameOverState);
         return;
     }
 

@@ -1,4 +1,4 @@
-class GameStateMachine {
+class AppStateMachine {
     constructor() {
         this.transitions = {};
         this.currentState = null;

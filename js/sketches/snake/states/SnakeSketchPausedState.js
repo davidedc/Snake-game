@@ -1,4 +1,4 @@
-class GamePausedState extends GameState {
+class SnakeSketchPausedState extends AppState {
 
     static menu;
 
@@ -6,13 +6,13 @@ class GamePausedState extends GameState {
         //console.log("dismissing menu and restarting game...");
         game.sound.play('pause');
         this.menu.dismiss();
-        stateMachine.changeState(GameOngoingState);
+        stateMachine.changeState(SnakeSketchPlayingState);
         game.startGameLoop();
     }
 
     static moveToNextStateToResetGame(stateMachine) {
         this.menu.dismiss();
-        stateMachine.changeState(MainMenuState);
+        stateMachine.changeState(SnakeSketchMainMenuState);
     }
 
 
