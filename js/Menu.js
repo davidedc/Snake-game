@@ -27,15 +27,17 @@ class Menu {
         this.menuElement.appendChild(headerElement);
     }
 
-    addChoice(label, options) {
+    addChoice(label, options, callback) {
         const choiceElement = document.createElement('div');
         this.selectableItems.push(choiceElement);
         this.menuElement.appendChild(choiceElement);
         choiceElement.className = 'menu-item selectable';
         choiceElement.label = label;
         choiceElement.options = options;
-
+        choiceElement.callback = callback;
         choiceElement.optionIndex = 0;
+        // call the callback with the initial value
+        choiceElement.callback(options[choiceElement.optionIndex]);
         choiceElement.textContent = `< ${choiceElement.label}: ${options[choiceElement.optionIndex]} >`;
     }
 
@@ -126,6 +128,8 @@ class Menu {
         if (choiceElement.options) {
             choiceElement.optionIndex = (choiceElement.optionIndex + direction + choiceElement.options.length) % choiceElement.options.length;
             choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
+            // call the callback with the new value
+            choiceElement.callback(choiceElement.options[choiceElement.optionIndex]);
         }
 
     }

@@ -11,6 +11,16 @@ class SnakeGame {
     this.inputHandler = new InputHandler(this);
   }
 
+  setIntervalTime(intervalTime) {
+    // only do this if the game is not playing, otherwise throw an error
+    if (gameStateMachine.currentState !== SnakeGamePlayingState) {
+      this.intervalTime = intervalTime;
+    }
+    else {
+      throw new Error('Cannot change the interval time while the game is running.');
+    }
+  }
+
   start() {
       this.reset();
       this.startGameLoop();
