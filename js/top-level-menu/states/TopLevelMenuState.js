@@ -33,8 +33,10 @@ class TopLevelMenuState extends AppState {
     static moveToNextStateTetrisGame(stateMachine) {
 
         // LOOKS PREPARATION
+
         // set the background color to black
         document.body.style.backgroundColor = 'black';
+        
         // add a canvas element to the page as if it was
         // <canvas width="320" height="640" id="game"></canvas>
         // document.body.innerHTML = '<canvas width="320" height="640" id="game"></canvas>';
