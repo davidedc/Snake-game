@@ -180,10 +180,10 @@ class Menu {
                 break;
             case 'ArrowLeft':
                 if (this.isTopMenu) {
-                    this.updateSelection(1);
+                    this.updateSelection(-1);
                 }
                 else {
-                    this.cycleChoice(1);
+                    this.cycleChoice(-1);
                 }
                 break;
             case 'ArrowRight':
