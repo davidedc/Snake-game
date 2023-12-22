@@ -86,6 +86,7 @@ function placeTetromino() {
           return gameStateMachine.changeState(TetrisGameGameOverState);
         }
 
+        soundSystem.play('blockFall');
         playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
       }
     }

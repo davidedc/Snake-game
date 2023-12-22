@@ -124,7 +124,9 @@ class Menu {
     }
 
     updateSelection(direction) {
-        
+        // play "click" sound
+        soundSystem.play('click');
+
         const itemCount = this.selectableItems.length;
         this.currentSelection = (this.currentSelection + direction + itemCount) % itemCount;
 
@@ -206,6 +208,7 @@ class Menu {
               choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
             }
 
+            soundSystem.play('click');
             // call the callback with the new value
             choiceElement.callback(choiceElement.options[choiceElement.optionIndex]);
         }
