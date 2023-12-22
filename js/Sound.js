@@ -6,6 +6,12 @@ class Sound {
             loop: true
         });
 
+        this.dogMusic = new Howl({
+            src: ['./music-data/dog-music.mp3'],
+            html5: true,
+            loop: true
+        });
+
         this.topLevelMenuMusic = new Howl({
             src: ['./music-data/topl-level-menu-music.mp3'],
             html5: true,
@@ -109,5 +115,15 @@ class Sound {
 
     stopSnakeMusic() {
         this.snakeMusic.stop();
+    }
+
+    //
+
+    playDogMusic() {
+        this.dogMusic.play();
+    }
+
+    stopDogMusic() {
+        this.dogMusic.stop();
     }
 }
