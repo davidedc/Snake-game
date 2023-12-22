@@ -37,7 +37,7 @@ class TetrisGameGameOverState extends AppState {
         
         // the game loop has already been stopped by the time we enter this state
 
-        game.sound.play('gameOver');
+        soundSystem.play('gameOver');
         cancelAnimationFrame(rAF);
 
         // in half a second, show the game over menu

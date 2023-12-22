@@ -51,7 +51,6 @@ class TopLevelMenuState extends AppState {
         game.pauseGameLoop = function() {
             cancelAnimationFrame(rAF);
         }
-        game.sound = new Sound();
 
         // key can be one of: 'ArrowUp' 'ArrowDown' ArrowLeft' 'ArrowRight'
         game.keyDown = function(key) {

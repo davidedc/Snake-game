@@ -46,7 +46,6 @@ class SnakeGame {
     this.grid = new Grid(this.gridWidth, this.gridHeight, this.cellSize);
     this.snake = new Snake(this.grid);
     this.food = new Food();
-    this.sound = new Sound();
 
     this.score = 0;
     this.updateScore();
@@ -76,7 +75,7 @@ class SnakeGame {
     const newHead = this.snake.getHead();
 
     if (this.grid.getCell(newHead).isFood()) {
-        this.sound.play('eat');
+        soundSystem.play('eat');
         this.grid.getCell(this.food.position).reset();
         this.snake.grow();
         this.score++;

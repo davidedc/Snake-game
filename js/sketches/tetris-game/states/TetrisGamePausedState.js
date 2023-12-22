@@ -4,7 +4,7 @@ class TetrisGamePausedState extends AppState {
 
     static moveToNextStateToReStartGame(stateMachine) {
         //console.log("dismissing menu and restarting game...");
-        game.sound.play('pause');
+        soundSystem.play('pause');
         this.menu.dismiss();
         stateMachine.changeState(TetrisGamePlayingState);
         //game.startGameLoop();
@@ -25,7 +25,7 @@ class TetrisGamePausedState extends AppState {
     static onEnter(stateMachine) {
         
         game.pauseGameLoop();
-        game.sound.play('pause');
+        soundSystem.play('pause');
 
         this.menu = new Menu();
 
