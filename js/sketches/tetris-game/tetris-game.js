@@ -112,7 +112,6 @@ function placeTetromino() {
 }
 
 var canvas, context;
-//const grid = 32;
 const grid = 23;
 const tetrominoSequence = [];
 

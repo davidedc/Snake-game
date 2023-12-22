@@ -57,10 +57,6 @@ class Menu {
         this.menuElement.style.flexWrap = 'wrap';
         this.menuElement.style.border = '0px';
 
-
-        //document.querySelector('.overlay').style.backgroundColor = 'rgba(255, 255, 255, 1)';
-
-
         const entryElement = document.createElement('div');
         entryElement.className = 'menu-item selectable';
         this.selectableItems.push(entryElement);
