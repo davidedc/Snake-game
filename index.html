@@ -48,6 +48,10 @@
 
 <script src="./js/sketches/snake-game/preload-emoji-svgs.js"></script>
 
+<script src="./music-data/topl-level-menu-music.js"></script>
+<script src="./music-data/snake-music.js"></script>
+<script src="./music-data/tetris-music.js"></script>
+
 <script src="./js/sketches/tetris-game/tetris-game.js"></script>
 
 <script>
@@ -90,6 +94,9 @@
   // add to the debug div that we are starting the game
   //document.querySelector('.debug span').textContent = 'Starting the game...';
 
+  const synths = [];
+  //TopLevelMenuState.startPlayingTopLevelMenuMusic();
+
   gameStateMachine.changeState(TopLevelMenuState);
 
 
@@ -110,7 +117,7 @@
   });
   */
 
-
+  
 </script>
 
 </html>

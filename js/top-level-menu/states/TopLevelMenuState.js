@@ -110,7 +110,17 @@ class TopLevelMenuState extends AppState {
         }
     }
 
+    static startPlayingTopLevelMenuMusic() {
+        soundSystem.playMusic(topLevelMenuMusic);    
+    }
+
+    static stopPlayingTopLevelMenuMusic() {
+        soundSystem.stopMusic();
+    }
+
     static onEnter(stateMachine) {
+        //this.stopPlayingTopLevelMenuMusic();
+        this.startPlayingTopLevelMenuMusic();
         
         this.menu = new Menu();
 
@@ -129,5 +139,6 @@ class TopLevelMenuState extends AppState {
     }
 
     static onExit(stateMachine) {
+        this.stopPlayingTopLevelMenuMusic();
     }
 }
