@@ -4,8 +4,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /* Semi-transparent gray */
-    background-color: rgba(128, 128, 128, 0.7);
+    /* the background color is set via code
+    because the top level menu has a different background */
+    transition: background-color 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;

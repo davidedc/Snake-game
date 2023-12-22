@@ -117,6 +117,15 @@ class Menu {
         // append to the overlay instead of the body
         overlayDiv.appendChild(this.menuElement);
 
+        // Introduce a slight delay before applying the background color
+        setTimeout(() => {
+            if (this.isTopMenu) {
+                overlayDiv.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+            } else {
+                overlayDiv.style.backgroundColor = 'rgba(128, 128, 128, 0.7)';
+            }
+        }, 10); // A delay of 10ms is generally enough
+
         this.updateSelection(0);
     }
 
@@ -136,7 +145,6 @@ class Menu {
             item.classList.toggle('selected', isSelected);
 
             if (this.isTopMenu) {
-                document.querySelector('.overlay').style.backgroundColor = 'rgba(255, 255, 255, 1)';
                 // change the style of all the elements of the class .selected
                 //   background-color: pink;
                 // and the non-selected elements
