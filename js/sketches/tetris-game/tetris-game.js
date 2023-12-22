@@ -1,73 +1,3 @@
-// LOOKS PREPARATION
-// set the background color to black
-document.body.style.backgroundColor = 'black';
-// add a canvas element to the page as if it was
-// <canvas width="320" height="640" id="game"></canvas>
-document.body.innerHTML = '<canvas width="320" height="640" id="game"></canvas>';
-// set the canvas on the page (need to find it in the dom) as if it was css "border: 1px solid white;"
-document.querySelector('canvas').style.border = '1px solid white';
-
-
-var game = {};
-game.pauseGameLoop = function() {
-    cancelAnimationFrame(rAF);
-}
-game.sound = new Sound();
-
-const gameStateMachine = new AppStateMachine();
-
-var SnakeGamePlayingState = {};
-var SnakeGamePausedState = {};
-
-// Define transitions
-gameStateMachine.addTransition(TetrisGameMainMenuState, TetrisGamePlayingState);
-gameStateMachine.addTransition(TetrisGamePlayingState, TetrisGamePausedState);
-gameStateMachine.addTransition(TetrisGamePlayingState, TetrisGameGameOverState);
-gameStateMachine.addTransition(TetrisGamePausedState, TetrisGamePlayingState);
-gameStateMachine.addTransition(TetrisGamePausedState, TetrisGameMainMenuState);
-gameStateMachine.addTransition(TetrisGameGameOverState, TetrisGameMainMenuState);
-
-var inputHandler = new InputHandler(this);
-
-// key can be one of: 'ArrowUp' 'ArrowDown' ArrowLeft' 'ArrowRight'
-game.keyDown = function(key) {
-    if (gameOver) return;
-
-    // left and right arrow keys (move)
-    if (key === 'ArrowLeft' || key === 'ArrowRight') {
-      const col = key === 'ArrowLeft'
-        ? tetromino.col - 1
-        : tetromino.col + 1;
-  
-      if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-        tetromino.col = col;
-      }
-    }
-  
-    // up arrow key (rotate)
-    if (key === 'ArrowUp') {
-      const matrix = rotate(tetromino.matrix);
-      if (isValidMove(matrix, tetromino.row, tetromino.col)) {
-        tetromino.matrix = matrix;
-      }
-    }
-  
-    // down arrow key (drop)
-    if(key === 'ArrowDown') {
-      const row = tetromino.row + 1;
-  
-      if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
-        tetromino.row = row - 1;
-  
-        placeTetromino();
-        return;
-      }
-  
-      tetromino.row = row;
-    }
-}
-
-
 // https://tetris.fandom.com/wiki/Tetris_Guideline
 
 // get a random integer between the range of [min,max]
@@ -180,9 +110,9 @@ function placeTetromino() {
   tetromino = getNextTetromino();
 }
 
-const canvas = document.getElementById('game');
-const context = canvas.getContext('2d');
-const grid = 32;
+var canvas, context;
+//const grid = 32;
+const grid = 23;
 const tetrominoSequence = [];
 
 // keep track of what is in every cell of the game using a 2d array
@@ -244,8 +174,6 @@ const colors = {
   'L': 'orange'
 };
 
-// populate the empty state
-resetPlayField();
 
 
 function resetPlayField() {
@@ -308,5 +236,3 @@ function loop() {
     }
   }
 }
-
-gameStateMachine.changeState(TetrisGameMainMenuState);

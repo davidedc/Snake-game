@@ -3,9 +3,14 @@ class TetrisGameMainMenuState extends AppState {
     static menu;
 
     static moveToNextStateToStartGame(stateMachine) {
-        // Implementation to move to the next state
+        this.menu.dismiss();
         resetPlayField();
         stateMachine.changeState(TetrisGamePlayingState, this.menu); // Assuming stateMachine is properly defined
+    }
+
+    static moveToNextStateQuitGame(stateMachine) {
+        this.menu.dismiss();
+        stateMachine.changeState(TopLevelMenuState);
     }
 
     static setLevel(levelAsString) {
@@ -30,22 +35,25 @@ class TetrisGameMainMenuState extends AppState {
         this.menu = new Menu();
 
         // Creating and displaying the menu
-        this.menu.setTitle('Snake Game');
-        this.menu.addBoldHeader('Top Score: 0');
+        this.menu.setTitle('Tetris Game');
+        //this.menu.addBoldHeader('Top Score: 0');
         this.menu.addTitleDividerLine();
         // third parameter is a callback function that is called when the entry is selected
+        this.menu.addSelectableEntry('Quit game', () => {
+            this.moveToNextStateQuitGame(stateMachine); // Adjusted for static context
+        });
+
         this.menu.addChoice('Level', ['Easy', 'Medium', 'Hard'], (levelAsString) => { this.setLevel(levelAsString); });
+
         this.menu.addSelectableEntry('Start game', () => {
             this.moveToNextStateToStartGame(stateMachine); // Adjusted for static context
         });
-        this.menu.currentSelection = 1;
+        this.menu.currentSelection = 2;
         this.menu.display();
         
     }
 
     static onExit(stateMachine) {
-        this.menu.dismiss();
-        //game.start();        
     }
 }
 

@@ -38,8 +38,17 @@
 <script src="./js/sketches/snake-game/states/SnakeGamePausedState.js"></script>
 <script src="./js/sketches/snake-game/states/SnakeGameMainMenuState.js"></script>
 <script src="./js/sketches/snake-game/states/SnakeGameSplashScreenState.js"></script>
+
+<script src="./js/sketches/tetris-game/states/TetrisGamePlayingState.js"></script>
+<script src="./js/sketches/tetris-game/states/TetrisGameOptionsState.js"></script>
+<script src="./js/sketches/tetris-game/states/TetrisGameGameOverState.js"></script>
+<script src="./js/sketches/tetris-game/states/TetrisGamePausedState.js"></script>
+<script src="./js/sketches/tetris-game/states/TetrisGameMainMenuState.js"></script>
+<script src="./js/sketches/tetris-game/states/TetrisGameSplashScreenState.js"></script>
+
 <script src="./js/sketches/snake-game/preload-emoji-svgs.js"></script>
 
+<script src="./js/sketches/tetris-game/tetris-game.js"></script>
 
 <script>
 
@@ -49,6 +58,9 @@
   // gameStateMachine.addTransition(SnakeGameSplashScreenState, SnakeGameMainMenuState);
   //gameStateMachine.addTransition(SnakeGameMainMenuState, SnakeGameOptionsState);
   gameStateMachine.addTransition(TopLevelMenuState, SnakeGameMainMenuState);
+  gameStateMachine.addTransition(TopLevelMenuState, TetrisGameMainMenuState);
+ 
+  
   gameStateMachine.addTransition(SnakeGameMainMenuState, SnakeGamePlayingState);
   gameStateMachine.addTransition(SnakeGameMainMenuState, TopLevelMenuState);
   gameStateMachine.addTransition(SnakeGamePlayingState, SnakeGamePausedState);
@@ -59,6 +71,16 @@
   gameStateMachine.addTransition(SnakeGameGameOverState, SnakeGameMainMenuState);
   gameStateMachine.addTransition(SnakeGameGameOverState, TopLevelMenuState);
   
+  gameStateMachine.addTransition(TetrisGameMainMenuState, TetrisGamePlayingState);
+  gameStateMachine.addTransition(TetrisGameMainMenuState, TopLevelMenuState);
+  gameStateMachine.addTransition(TetrisGamePlayingState, TetrisGamePausedState);
+  gameStateMachine.addTransition(TetrisGamePlayingState, TetrisGameGameOverState);
+  gameStateMachine.addTransition(TetrisGamePausedState, TetrisGamePlayingState);
+  gameStateMachine.addTransition(TetrisGamePausedState, TopLevelMenuState);
+  gameStateMachine.addTransition(TetrisGamePausedState, TetrisGameMainMenuState);
+  gameStateMachine.addTransition(TetrisGameGameOverState, TetrisGameMainMenuState);
+  gameStateMachine.addTransition(TetrisGameGameOverState, TopLevelMenuState);
+
 
 
   var game;

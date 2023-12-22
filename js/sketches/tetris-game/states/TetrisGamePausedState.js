@@ -16,6 +16,11 @@ class TetrisGamePausedState extends AppState {
         stateMachine.changeState(TetrisGameMainMenuState);
     }
 
+    static moveToNextStateQuitGame(stateMachine) {
+        this.menu.dismiss();
+        stateMachine.changeState(TopLevelMenuState);
+    }
+
 
     static onEnter(stateMachine) {
         
@@ -27,6 +32,9 @@ class TetrisGamePausedState extends AppState {
         // Creating and displaying the menu
         this.menu.setTitle('Paused');
         this.menu.addTitleDividerLine();
+        this.menu.addSelectableEntry('Quit game', () => {
+            this.moveToNextStateQuitGame(stateMachine); // Adjusted for static context
+        });
         this.menu.addSelectableEntry('New game', () => {
             this.moveToNextStateToResetGame(stateMachine); // Adjusted for static context
         });
@@ -36,7 +44,7 @@ class TetrisGamePausedState extends AppState {
         this.menu.addSelectableEntry('Continue', () => {
             this.moveToNextStateToReStartGame(stateMachine); // Adjusted for static context
         }, true);
-        this.menu.currentSelection = 1;
+        this.menu.currentSelection = 2;
         this.menu.display();
         
     }

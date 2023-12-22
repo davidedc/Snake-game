@@ -14,6 +14,8 @@ class TopLevelMenuState extends AppState {
     <div class="score">Score: <span>0</span></div>
     <div class="grid"></div>
   `;
+        // set the background color to off-white
+        document.body.style.backgroundColor = '#fafafa';
 
         // Define the dimensions and cell size for the grid
         const gridWidth = 25;
@@ -29,6 +31,69 @@ class TopLevelMenuState extends AppState {
     }
 
     static moveToNextStateTetrisGame(stateMachine) {
+
+        // LOOKS PREPARATION
+        // set the background color to black
+        document.body.style.backgroundColor = 'black';
+        // add a canvas element to the page as if it was
+        // <canvas width="320" height="640" id="game"></canvas>
+        // document.body.innerHTML = '<canvas width="320" height="640" id="game"></canvas>';
+        document.body.innerHTML = '<canvas width="230" height="460" id="game"></canvas>';
+        // set the canvas on the page (need to find it in the dom) as if it was css "border: 1px solid white;"
+        document.querySelector('canvas').style.border = '1px solid white';
+
+        // these two are globals
+        canvas = document.getElementById('game');
+        context = canvas.getContext('2d');
+
+
+        game = {};
+        game.pauseGameLoop = function() {
+            cancelAnimationFrame(rAF);
+        }
+        game.sound = new Sound();
+
+        // key can be one of: 'ArrowUp' 'ArrowDown' ArrowLeft' 'ArrowRight'
+        game.keyDown = function(key) {
+            if (gameOver) return;
+
+            // left and right arrow keys (move)
+            if (key === 'ArrowLeft' || key === 'ArrowRight') {
+            const col = key === 'ArrowLeft'
+                ? tetromino.col - 1
+                : tetromino.col + 1;
+        
+            if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+                tetromino.col = col;
+            }
+            }
+        
+            // up arrow key (rotate)
+            if (key === 'ArrowUp') {
+            const matrix = rotate(tetromino.matrix);
+            if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+                tetromino.matrix = matrix;
+            }
+            }
+        
+            // down arrow key (drop)
+            if(key === 'ArrowDown') {
+            const row = tetromino.row + 1;
+        
+            if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+                tetromino.row = row - 1;
+        
+                placeTetromino();
+                return;
+            }
+        
+            tetromino.row = row;
+            }
+        }
+
+        // populate the empty state
+        resetPlayField();
+
         stateMachine.changeState(TetrisGameMainMenuState, this.menu); // Assuming stateMachine is properly defined
     }
 
