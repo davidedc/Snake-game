@@ -18,7 +18,7 @@ class TopLevelMenuState extends AppState {
         document.body.style.backgroundColor = '#fafafa';
 
         // Define the dimensions and cell size for the grid
-        const gridWidth = 25;
+        const gridWidth = 30;
         const gridHeight = 20;
         const cellSize = 20;
         const initialInterval = 200;
