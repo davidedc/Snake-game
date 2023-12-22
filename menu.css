@@ -11,17 +11,6 @@
     align-items: center;
 }
 
-#settingsMenu {
-    width: 300px;
-    height: auto;
-    border: 2px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    /* Ensure menu background is opaque */
-}
 
 .menu-item {
     padding: 5px;
@@ -39,6 +28,8 @@
 .selected {
     background-color: black;
     color: white;
+    /* make it with rounded corners */
+    border-radius: 5px;
 }
 
 .menu-title-divider {

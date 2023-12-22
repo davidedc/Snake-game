@@ -2,9 +2,33 @@ class Menu {
     constructor() {
         this.menuElement = document.createElement('div');
         this.menuElement.id = 'settingsMenu';
+
+        // via javascript apply all these style properties:
+        // width: 300px;
+        // height: auto;
+        // border: 2px solid black;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+        // background-color: white;
+   
+        this.menuElement.style.width = '300px';
+        this.menuElement.style.height = 'auto';
+        this.menuElement.style.border = '2px solid black';
+        this.menuElement.style.display = 'flex';
+        this.menuElement.style.flexDirection = 'column';
+        this.menuElement.style.justifyContent = 'center';
+        this.menuElement.style.alignItems = 'center';
+        this.menuElement.style.backgroundColor = 'white';
+
         this.selectableItems = [];
         this.currentSelection = 0;
+
+        this.isTopMenu = false;
     }
+
+
 
     setTitle(title) {
         const titleElement = document.createElement('div');
@@ -19,6 +43,34 @@ class Menu {
         headerElement.textContent = header;
         this.menuElement.appendChild(headerElement);
     }
+
+    // used to show a list of images side by side, with a label under each,
+    // and allows the user to select one
+    // Note that each call to this method only adds one image, and multiple
+    // calls just add the images side by side
+    addSelectableVerticalImage(imagePath, label, callbacks) {
+
+        this.isTopMenu = true;
+
+        // Adjust CSS properties of the menuElement
+        this.menuElement.style.flexDirection = 'row';
+        this.menuElement.style.flexWrap = 'wrap';
+        this.menuElement.style.border = '0px';
+
+
+        //document.querySelector('.overlay').style.backgroundColor = 'rgba(255, 255, 255, 1)';
+
+
+        const entryElement = document.createElement('div');
+        entryElement.className = 'menu-item selectable';
+        this.selectableItems.push(entryElement);
+        this.menuElement.appendChild(entryElement);
+        entryElement.callback = callbacks; // Add a callback property to the element
+        entryElement.imagePath = imagePath;
+        entryElement.label = label;
+        entryElement.innerHTML = `<img src="${imagePath}" alt="${label}"><br>${label}`;
+    }
+    
 
     addLine(line) {
         const headerElement = document.createElement('div');
@@ -63,6 +115,7 @@ class Menu {
 
         // append to the overlay instead of the body
         document.querySelector('.overlay').appendChild(this.menuElement);
+
         this.updateSelection(0);
     }
 
@@ -71,6 +124,7 @@ class Menu {
     }
 
     updateSelection(direction) {
+        
         const itemCount = this.selectableItems.length;
         this.currentSelection = (this.currentSelection + direction + itemCount) % itemCount;
 
@@ -78,6 +132,16 @@ class Menu {
             const isSelected = index === this.currentSelection;
             item.classList.toggle('selected', isSelected);
 
+            if (this.isTopMenu) {
+                document.querySelector('.overlay').style.backgroundColor = 'rgba(255, 255, 255, 1)';
+                // change the style of all the elements of the class .selected
+                //   background-color: pink;
+                // and the non-selected elements
+                //   background-color: white;
+                // via javascript
+                item.style.backgroundColor = isSelected ? 'pink' : 'white';
+            }
+    
             /*
             // if the item has options, and it's selected, add the beginning and ending arrows
             // otherwhise, remove them
@@ -105,10 +169,20 @@ class Menu {
                 this.updateSelection(+1);
                 break;
             case 'ArrowLeft':
-                this.cycleChoice(-1);
+                if (this.isTopMenu) {
+                    this.updateSelection(1);
+                }
+                else {
+                    this.cycleChoice(1);
+                }
                 break;
             case 'ArrowRight':
-                this.cycleChoice(1);
+                if (this.isTopMenu) {
+                    this.updateSelection(1);
+                }
+                else {
+                    this.cycleChoice(1);
+                }
                 break;
             // enter OR space
             case 'Enter':
@@ -127,7 +201,11 @@ class Menu {
         var choiceElement = this.getSelectedItem()
         if (choiceElement.options) {
             choiceElement.optionIndex = (choiceElement.optionIndex + direction + choiceElement.options.length) % choiceElement.options.length;
-            choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
+
+            if (choiceElement.textContent) {
+              choiceElement.textContent = `< ${choiceElement.label}: ${choiceElement.options[choiceElement.optionIndex]} >`;
+            }
+
             // call the callback with the new value
             choiceElement.callback(choiceElement.options[choiceElement.optionIndex]);
         }

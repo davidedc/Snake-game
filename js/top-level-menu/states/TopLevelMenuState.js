@@ -116,14 +116,11 @@ class TopLevelMenuState extends AppState {
         this.menu = new Menu();
 
         // Creating and displaying the menu
-        this.menu.setTitle('Choose a game');
-        this.menu.addTitleDividerLine();
-
-        this.menu.addSelectableEntry('Tetris', () => {
+        this.menu.addSelectableVerticalImage("./top-level-menu-images/top-level-image-1.png",'Tetris', () => {
             this.moveToNextStateTetrisGame(stateMachine); // Adjusted for static context
         });
-
-        this.menu.addSelectableEntry('Snake', () => {
+    
+        this.menu.addSelectableVerticalImage("./top-level-menu-images/top-level-image-2.png",'Snake', () => {
             this.moveToNextStateSnakeGame(stateMachine); // Adjusted for static context
         });
 
