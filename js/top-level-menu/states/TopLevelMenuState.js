@@ -111,11 +111,11 @@ class TopLevelMenuState extends AppState {
     }
 
     static startPlayingTopLevelMenuMusic() {
-        soundSystem.playMusic(topLevelMenuMusic);    
+        soundSystem.playTopLevelMenuMusic();    
     }
 
     static stopPlayingTopLevelMenuMusic() {
-        soundSystem.stopMusic();
+        soundSystem.stopTopLevelMenuMusic();
     }
 
     static onEnter(stateMachine) {

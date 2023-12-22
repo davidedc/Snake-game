@@ -1,10 +1,10 @@
 class SnakeGamePlayingState extends AppState {
 
     static onEnter(stateMachine) {
-        soundSystem.playMusic(snakeMusic);
+        soundSystem.playSnakeMusic();
     }
 
     static onExit(stateMachine) {
-        soundSystem.stopMusic();
+        soundSystem.stopSnakeMusic();
     }
 }
