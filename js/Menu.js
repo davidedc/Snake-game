@@ -111,10 +111,11 @@ class Menu {
 
     display() {
         // append to the body a div with class overlay
-        document.body.appendChild(document.createElement('div')).className = 'overlay';
+        var overlayDiv = document.body.appendChild(document.createElement('div'));
+        overlayDiv.className = 'overlay';
 
         // append to the overlay instead of the body
-        document.querySelector('.overlay').appendChild(this.menuElement);
+        overlayDiv.appendChild(this.menuElement);
 
         this.updateSelection(0);
     }
