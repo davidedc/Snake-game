@@ -1,4 +1,18 @@
-
+/*
+// attach a span at the top of the page to show debug info
+const debugSpan = document.createElement('span');
+debugSpan.style.position = 'absolute';
+debugSpan.style.top = '0';
+debugSpan.style.left = '0';
+debugSpan.style.color = 'white';
+debugSpan.style.backgroundColor = 'black';
+debugSpan.style.padding = '5px';
+debugSpan.style.fontFamily = 'monospace';
+debugSpan.style.fontSize = '12px';
+debugSpan.style.zIndex = '1000';
+debugSpan.textContent = 'debug info';
+document.body.appendChild(debugSpan);
+*/
 
 
 
@@ -26,8 +40,11 @@ function dogLoop() {
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   // if any of the inputHandler analog gamestick axes data
-  // ...is null, then generate a synthetic movement  
+  // ...is null, then generate a synthetic movement 
   if (inputHandler.analogStickLeftY === null || inputHandler.analogStickRightX === null ) {
+    // output to debug span that we don't have analog gamestick axes data
+    //debugSpan.textContent = 'no analog gamestick axes data';
+
     // make bonePosX and bonePosY move smoothly across the canvas extent using sin/cos
     // a la lissajous curve
     bonePosX = 100 + 100 * Math.cos(COUNTER * 0.03);
@@ -38,9 +55,9 @@ function dogLoop() {
   // and the analogStickRightX to the canvas width
   else {
     // map analogStickLeftY from [-1, 1] to [0, canvas.height] 
-    bonePosY = (analogStickLeftY + 1) * canvas.height / 2;
+    bonePosY = (inputHandler.analogStickLeftY + 1) * canvas.height / 2;
     // map analogStickRightX from [-1, 1] to [0, canvas.width]
-    bonePosX = (analogStickRightX + 1) * canvas.width / 2;
+    bonePosX = (inputHandler.analogStickRightX + 1) * canvas.width / 2;
   }
 
   // draw a bone emoji as text at the dog's position
