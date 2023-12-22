@@ -2,17 +2,20 @@ class Sound {
     constructor() {
         this.snakeMusic = new Howl({
             src: ['./music-data/snake-music.mp3'],
-            html5: true
+            html5: true,
+            loop: true
         });
 
         this.topLevelMenuMusic = new Howl({
             src: ['./music-data/topl-level-menu-music.mp3'],
-            html5: true
+            html5: true,
+            loop: true
         });
 
         this.tetrisMusic = new Howl({
             src: ['./music-data/tetris-music.mp3'],
-            html5: true
+            html5: true,
+            loop: true
         });
 
         // ./sounds-data/blockFall.mp3
