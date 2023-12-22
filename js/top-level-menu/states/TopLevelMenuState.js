@@ -108,7 +108,7 @@ class TopLevelMenuState extends AppState {
         // add a canvas element to the page as if it was
         // <canvas width="320" height="640" id="game"></canvas>
         // document.body.innerHTML = '<canvas width="320" height="640" id="game"></canvas>';
-        document.body.innerHTML = '<canvas width="230" height="460" id="game"></canvas>';
+        document.body.innerHTML = '<canvas width="600" height="440" id="game"></canvas>';
         // set the canvas on the page (need to find it in the dom) as if it was css "border: 1px solid white;"
         document.querySelector('canvas').style.border = '1px solid white';
 

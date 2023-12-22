@@ -1,6 +1,11 @@
 class InputHandler {
     constructor() {
 
+        this.analogStickLeftX = null;
+        this.analogStickLeftY = null;
+        this.analogStickRightX = null;
+        this.analogStickRightY = null;
+
         // Mapping controller buttons to game actions
         this.controllerMapping = {
             12: 'ArrowUp',    // UP
@@ -97,6 +102,14 @@ class InputHandler {
                     // Update the previous state
                     this.previousButtonStates[index] = isCurrentlyPressed;
                 });
+
+                // update the analog sticks
+                // left analog stick
+                this.analogStickLeftX = gamepads[0].axes[0];
+                this.analogStickLeftY = gamepads[0].axes[1];
+                // right analog stick
+                this.analogStickRightX = gamepads[0].axes[2];
+                this.analogStickRightY = gamepads[0].axes[3];
             }
             requestAnimationFrame(pollGamepad);
         };
