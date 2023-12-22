@@ -1,5 +1,7 @@
 class Menu {
     constructor() {
+        this.isTopMenu = false;
+
         this.menuElement = document.createElement('div');
         this.menuElement.id = 'settingsMenu';
 
@@ -24,8 +26,6 @@ class Menu {
 
         this.selectableItems = [];
         this.currentSelection = 0;
-
-        this.isTopMenu = false;
     }
 
 
