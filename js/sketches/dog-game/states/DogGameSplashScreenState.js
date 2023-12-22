@@ -1,0 +1,3 @@
+class DogGameSplashScreenState extends AppState {
+
+}

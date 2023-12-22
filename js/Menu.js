@@ -16,6 +16,7 @@ class Menu {
         // background-color: white;
    
         this.menuElement.style.width = '300px';
+
         this.menuElement.style.height = 'auto';
         this.menuElement.style.border = '2px solid black';
         this.menuElement.style.display = 'flex';
@@ -51,6 +52,8 @@ class Menu {
     addSelectableVerticalImage(imagePath, label, callbacks) {
 
         this.isTopMenu = true;
+        // make it wider to accomodate the images of the games
+        this.menuElement.style.width = '500px';
 
         // Adjust CSS properties of the menuElement
         this.menuElement.style.flexDirection = 'row';

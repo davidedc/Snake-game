@@ -50,6 +50,13 @@
 <script src="./js/sketches/tetris-game/states/TetrisGameMainMenuState.js"></script>
 <script src="./js/sketches/tetris-game/states/TetrisGameSplashScreenState.js"></script>
 
+<script src="./js/sketches/dog-game/states/DogGamePlayingState.js"></script>
+<script src="./js/sketches/dog-game/states/DogGameOptionsState.js"></script>
+<script src="./js/sketches/dog-game/states/DogGameGameOverState.js"></script>
+<script src="./js/sketches/dog-game/states/DogGamePausedState.js"></script>
+<script src="./js/sketches/dog-game/states/DogGameMainMenuState.js"></script>
+<script src="./js/sketches/dog-game/states/DogGameSplashScreenState.js"></script>
+
 <script src="./js/sketches/snake-game/preload-emoji-svgs.js"></script>
 
 <!--<script src="./music-data/topl-level-menu-music.js"></script>-->
@@ -57,6 +64,7 @@
 <!--<script src="./music-data/tetris-music.js"></script>-->
 
 <script src="./js/sketches/tetris-game/tetris-game.js"></script>
+<script src="./js/sketches/dog-game/dog-game.js"></script>
 
 <script>
 
@@ -67,6 +75,7 @@
   //gameStateMachine.addTransition(SnakeGameMainMenuState, SnakeGameOptionsState);
   gameStateMachine.addTransition(TopLevelMenuState, SnakeGameMainMenuState);
   gameStateMachine.addTransition(TopLevelMenuState, TetrisGameMainMenuState);
+  gameStateMachine.addTransition(TopLevelMenuState, DogGameMainMenuState);
  
   
   gameStateMachine.addTransition(SnakeGameMainMenuState, SnakeGamePlayingState);
@@ -88,6 +97,16 @@
   gameStateMachine.addTransition(TetrisGamePausedState, TetrisGameMainMenuState);
   gameStateMachine.addTransition(TetrisGameGameOverState, TetrisGameMainMenuState);
   gameStateMachine.addTransition(TetrisGameGameOverState, TopLevelMenuState);
+
+  gameStateMachine.addTransition(DogGameMainMenuState, DogGamePlayingState);
+  gameStateMachine.addTransition(DogGameMainMenuState, TopLevelMenuState);
+  gameStateMachine.addTransition(DogGamePlayingState, DogGamePausedState);
+  gameStateMachine.addTransition(DogGamePlayingState, DogGameGameOverState);
+  gameStateMachine.addTransition(DogGamePausedState, DogGamePlayingState);
+  gameStateMachine.addTransition(DogGamePausedState, TopLevelMenuState);
+  gameStateMachine.addTransition(DogGamePausedState, DogGameMainMenuState);
+  gameStateMachine.addTransition(DogGameGameOverState, DogGameMainMenuState);
+  gameStateMachine.addTransition(DogGameGameOverState, TopLevelMenuState);
 
 
 

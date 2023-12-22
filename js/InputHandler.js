@@ -45,19 +45,22 @@ class InputHandler {
     dispatchInputEvents(key) {
         // if game is running then we proces the space to pause the game
         // otherwise we let the menu handle the space to select an option
-        if (key === ' ' && gameStateMachine.currentState && (gameStateMachine.currentState === SnakeGamePlayingState || gameStateMachine.currentState === TetrisGamePlayingState) ) {
+        if (key === ' ' && gameStateMachine.currentState && (gameStateMachine.currentState === SnakeGamePlayingState || gameStateMachine.currentState === TetrisGamePlayingState || gameStateMachine.currentState === DogGamePlayingState) ) {
             if (gameStateMachine.currentState === SnakeGamePlayingState) {
                 gameStateMachine.changeState(SnakeGamePausedState);
             }
-            else {
+            else if (gameStateMachine.currentState === TetrisGamePlayingState) {
                 gameStateMachine.changeState(TetrisGamePausedState);
+            }
+            else if (gameStateMachine.currentState === DogGamePlayingState) {
+                gameStateMachine.changeState(DogGamePausedState);
             }
         }
         else if (gameStateMachine.currentState && gameStateMachine.currentState.menu) {
             gameStateMachine.currentState.menu.handleArrowKeys(key);
         }
         else if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
-            if (!gameStateMachine.currentState || (gameStateMachine.currentState !== SnakeGamePausedState || gameStateMachine.currentState !== TetrisGamePausedState) ) {
+            if (!gameStateMachine.currentState || (gameStateMachine.currentState !== SnakeGamePausedState || gameStateMachine.currentState !== TetrisGamePausedState || gameStateMachine.currentState !== DogGamePausedState) ) {
                 game.keyDown(key);
             }
         }
