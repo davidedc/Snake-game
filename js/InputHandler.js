@@ -122,6 +122,11 @@ class InputHandler {
                         let mappedKey = this.controllerMapping[index];
                         this.dispatchKeyDownInputEvents(mappedKey);
                     }
+                    // vice versa if the button was pressed before and is not pressed now
+                    else if (wasPreviouslyPressed && !isCurrentlyPressed && this.controllerMapping[index]) {
+                        let mappedKey = this.controllerMapping[index];
+                        this.dispatchKeyUpInputEvents(mappedKey);
+                    }
 
                     // Update the previous state
                     this.previousButtonStates[index] = isCurrentlyPressed;
