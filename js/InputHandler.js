@@ -47,15 +47,20 @@ class InputHandler {
         this.attachInputs();
     }
 
-    dispatchInputEvents(key) {
+    dispatchKeyDownInputEvents(key) {
+        // TODO you should probably first filter by the game and state of the game, and then by key
+
         // if game is running then we proces the space to pause the game
         // otherwise we let the menu handle the space to select an option
-        if (key === ' ' && gameStateMachine.currentState && (gameStateMachine.currentState === SnakeGamePlayingState || gameStateMachine.currentState === TetrisGamePlayingState || gameStateMachine.currentState === DogGamePlayingState) ) {
+        if (key === ' ' && gameStateMachine.currentState && (gameStateMachine.currentState === SnakeGamePlayingState || gameStateMachine.currentState === TetrisGamePlayingState || gameStateMachine.currentState === BreakoutGamePlayingState || gameStateMachine.currentState === DogGamePlayingState) ) {
             if (gameStateMachine.currentState === SnakeGamePlayingState) {
                 gameStateMachine.changeState(SnakeGamePausedState);
             }
             else if (gameStateMachine.currentState === TetrisGamePlayingState) {
                 gameStateMachine.changeState(TetrisGamePausedState);
+            }
+            else if (gameStateMachine.currentState === BreakoutGamePlayingState) {
+                gameStateMachine.changeState(BreakoutGamePausedState);
             }
             else if (gameStateMachine.currentState === DogGamePlayingState) {
                 gameStateMachine.changeState(DogGamePausedState);
@@ -65,15 +70,34 @@ class InputHandler {
             gameStateMachine.currentState.menu.handleArrowKeys(key);
         }
         else if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
-            if (!gameStateMachine.currentState || (gameStateMachine.currentState !== SnakeGamePausedState || gameStateMachine.currentState !== TetrisGamePausedState || gameStateMachine.currentState !== DogGamePausedState) ) {
+            if (!gameStateMachine.currentState || (gameStateMachine.currentState !== SnakeGamePausedState || gameStateMachine.currentState !== TetrisGamePausedState || gameStateMachine.currentState !== DogGamePausedState || gameStateMachine.currentState !== BreakoutGamePausedState) ) {
                 game.keyDown(key);
             }
         }
+        else if (key === 'Enter') {
+            if (!gameStateMachine.currentState || (gameStateMachine.currentState === BreakoutGamePlayingState ) ) {
+                game.keyDown(key);
+            }
+        }
+   }
+
+   dispatchKeyUpInputEvents(key) {
+    // console.log('keyUp: ' + key);
+    // TODO you should first filter by the game and state of the game, and then by key
+    if (key === 'ArrowLeft' || key === 'ArrowRight') {
+        if (!gameStateMachine.currentState || (gameStateMachine.currentState === BreakoutGamePlayingState ) ) {
+            game.keyUp(key);
+        }
     }
+   }
 
     attachInputs() {
         document.addEventListener('keydown', e => {
-            this.dispatchInputEvents(e.key);
+            this.dispatchKeyDownInputEvents(e.key);
+        });
+
+        document.addEventListener('keyup', e => {
+            this.dispatchKeyUpInputEvents(e.key);
         });
 
         // Polling the gamepad state
@@ -96,7 +120,7 @@ class InputHandler {
                     // Check if the button was not pressed before and is pressed now
                     if (!wasPreviouslyPressed && isCurrentlyPressed && this.controllerMapping[index]) {
                         let mappedKey = this.controllerMapping[index];
-                        this.dispatchInputEvents(mappedKey);
+                        this.dispatchKeyDownInputEvents(mappedKey);
                     }
 
                     // Update the previous state

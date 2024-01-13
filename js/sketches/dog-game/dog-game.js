@@ -217,7 +217,7 @@ function drawOttoEyes(OTTO_X, OTTO_Y, OTTO_MENTAL_STATE, BLINK_COUNTER) {
 
 
 function drawOttoMouth(OTTO_X, OTTO_Y, GNASH_COUNTER) {
-  console.log('drawOttoMouth');
+  // console.log('drawOttoMouth');
   let gnashAmount = radians(GNASH_COUNTER);
 
   let topRowY = OTTO_Y - 20 + Math.cos(gnashAmount) * 15 + 5;

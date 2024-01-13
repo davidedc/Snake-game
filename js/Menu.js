@@ -53,7 +53,7 @@ class Menu {
 
         this.isTopMenu = true;
         // make it wider to accomodate the images of the games
-        this.menuElement.style.width = '500px';
+        this.menuElement.style.width = '600px';
 
         // Adjust CSS properties of the menuElement
         this.menuElement.style.flexDirection = 'row';

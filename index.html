@@ -50,6 +50,13 @@
 <script src="./js/sketches/tetris-game/states/TetrisGameMainMenuState.js"></script>
 <script src="./js/sketches/tetris-game/states/TetrisGameSplashScreenState.js"></script>
 
+<script src="./js/sketches/breakout-game/states/BreakoutGamePlayingState.js"></script>
+<script src="./js/sketches/breakout-game/states/BreakoutGameOptionsState.js"></script>
+<script src="./js/sketches/breakout-game/states/BreakoutGameGameOverState.js"></script>
+<script src="./js/sketches/breakout-game/states/BreakoutGamePausedState.js"></script>
+<script src="./js/sketches/breakout-game/states/BreakoutGameMainMenuState.js"></script>
+<script src="./js/sketches/breakout-game/states/BreakoutGameSplashScreenState.js"></script>
+
 <script src="./js/sketches/dog-game/states/DogGamePlayingState.js"></script>
 <script src="./js/sketches/dog-game/states/DogGameOptionsState.js"></script>
 <script src="./js/sketches/dog-game/states/DogGameGameOverState.js"></script>
@@ -64,6 +71,7 @@
 <!--<script src="./music-data/tetris-music.js"></script>-->
 
 <script src="./js/sketches/tetris-game/tetris-game.js"></script>
+<script src="./js/sketches/breakout-game/breakout-game.js"></script>
 <script src="./js/sketches/dog-game/dog-game.js"></script>
 
 <script>
@@ -75,6 +83,7 @@
   //gameStateMachine.addTransition(SnakeGameMainMenuState, SnakeGameOptionsState);
   gameStateMachine.addTransition(TopLevelMenuState, SnakeGameMainMenuState);
   gameStateMachine.addTransition(TopLevelMenuState, TetrisGameMainMenuState);
+  gameStateMachine.addTransition(TopLevelMenuState, BreakoutGameMainMenuState);
   gameStateMachine.addTransition(TopLevelMenuState, DogGameMainMenuState);
  
   
@@ -97,6 +106,16 @@
   gameStateMachine.addTransition(TetrisGamePausedState, TetrisGameMainMenuState);
   gameStateMachine.addTransition(TetrisGameGameOverState, TetrisGameMainMenuState);
   gameStateMachine.addTransition(TetrisGameGameOverState, TopLevelMenuState);
+
+  gameStateMachine.addTransition(BreakoutGameMainMenuState, BreakoutGamePlayingState);
+  gameStateMachine.addTransition(BreakoutGameMainMenuState, TopLevelMenuState);
+  gameStateMachine.addTransition(BreakoutGamePlayingState, BreakoutGamePausedState);
+  gameStateMachine.addTransition(BreakoutGamePlayingState, BreakoutGameGameOverState);
+  gameStateMachine.addTransition(BreakoutGamePausedState, BreakoutGamePlayingState);
+  gameStateMachine.addTransition(BreakoutGamePausedState, TopLevelMenuState);
+  gameStateMachine.addTransition(BreakoutGamePausedState, BreakoutGameMainMenuState);
+  gameStateMachine.addTransition(BreakoutGameGameOverState, BreakoutGameMainMenuState);
+  gameStateMachine.addTransition(BreakoutGameGameOverState, TopLevelMenuState);
 
   gameStateMachine.addTransition(DogGameMainMenuState, DogGamePlayingState);
   gameStateMachine.addTransition(DogGameMainMenuState, TopLevelMenuState);

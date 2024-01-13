@@ -191,8 +191,8 @@ function resetPlayField() {
 }
 
 // game loop
-function loop() {
-  rAF = requestAnimationFrame(loop);
+function tetrisLoop() {
+  rAF = requestAnimationFrame(tetrisLoop);
   context.clearRect(0,0,canvas.width,canvas.height);
 
   // draw the playfield

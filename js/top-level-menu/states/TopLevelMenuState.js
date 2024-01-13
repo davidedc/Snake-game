@@ -98,6 +98,77 @@ class TopLevelMenuState extends AppState {
         stateMachine.changeState(TetrisGameMainMenuState, this.menu); // Assuming stateMachine is properly defined
     }
 
+    static moveToNextStateBreakoutGame(stateMachine) {
+
+        // LOOKS PREPARATION
+
+        // set the background color to black
+        document.body.style.backgroundColor = 'black';
+        
+        // add a canvas element to the page as if it was
+        // <canvas width="320" height="640" id="game"></canvas>
+        // document.body.innerHTML = '<canvas width="400" height="500" id="game"></canvas>';
+        document.body.innerHTML = '<canvas width="400" height="500" id="game"></canvas>';
+        // set the canvas on the page (need to find it in the dom) as if it was css "border: 1px solid white;"
+        //document.querySelector('canvas').style.border = '1px solid white';
+
+        // these two are globals
+        canvas = document.getElementById('game');
+        context = canvas.getContext('2d');
+
+
+        game = {};
+        game.pauseGameLoop = function() {
+            cancelAnimationFrame(rAF);
+        }
+
+        paddle = {
+            // place the paddle horizontally in the middle of the screen
+            x: canvas.width / 2 - brickWidth / 2,
+            y: 440,
+            width: brickWidth * 1.5,
+            height: brickHeight / 2,
+          
+            // paddle x velocity
+            dx: 0
+        };
+          
+        // key can be one of: 'ArrowUp' 'ArrowDown' ArrowLeft' 'ArrowRight'
+        game.keyDown = function(key) {
+            //console.log('keyDown: ' + key);
+            if (gameOver) return;
+
+            if (key === 'ArrowLeft'){
+                paddle.dx = -3;
+            }
+
+            if (key === 'ArrowRight'){
+                paddle.dx = 3;
+            }
+
+            // button
+            if (key === 'Enter'){
+                if (ball.dx === 0 && ball.dy === 0) {
+                    ball.dx = ball.speed/2;
+                    // adjust the vertical velocity based on horizontal velocity
+                    ball.dy = Math.sqrt(ball.speed*ball.speed - ball.dx * ball.dx);
+                }
+            }                
+        }
+
+        game.keyUp = function(key) {
+            //console.log('keyUp: ' + key);
+
+            // button
+            paddle.dx = 0;
+        }
+
+        // populate the empty state
+        resetPlayField();
+
+        stateMachine.changeState(BreakoutGameMainMenuState, this.menu); // Assuming stateMachine is properly defined
+    }
+
     static moveToNextStateDogGame(stateMachine) {
 
         // LOOKS PREPARATION
@@ -198,7 +269,11 @@ class TopLevelMenuState extends AppState {
         this.menu.addSelectableVerticalImage("./top-level-menu-images/top-level-image-1.png",'Tetris', () => {
             this.moveToNextStateTetrisGame(stateMachine); // Adjusted for static context
         });
-    
+
+        this.menu.addSelectableVerticalImage("./top-level-menu-images/top-level-image-4.png",'Breakout', () => {
+            this.moveToNextStateBreakoutGame(stateMachine); // Adjusted for static context
+        });
+
         this.menu.addSelectableVerticalImage("./top-level-menu-images/top-level-image-2.png",'Snake', () => {
             this.moveToNextStateSnakeGame(stateMachine); // Adjusted for static context
         });

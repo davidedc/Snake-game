@@ -1,0 +1,3 @@
+class BreakoutGameSplashScreenState extends AppState {
+
+}

@@ -55,6 +55,22 @@ class Sound {
             html5: true
         });
 
+        this.ballBrick = new Howl({
+            src: ['./sounds-data/ball-brick.mp3'],
+            html5: true
+        });
+
+        this.ballPaddle = new Howl({
+            src: ['./sounds-data/ball-paddle.mp3'],
+            html5: true
+        });
+
+        this.ballWall = new Howl({
+            src: ['./sounds-data/ball-wall.mp3'],
+            html5: true
+        });
+
+
 
     }
 
@@ -80,6 +96,15 @@ class Sound {
                         break;
                     case 'blockFall':
                         this.blockFall.play();
+                        break;
+                    case 'ballBrick':
+                        this.ballBrick.play();
+                        break;
+                    case 'ballPaddle':
+                        this.ballPaddle.play();
+                        break;
+                    case 'ballWall':
+                        this.ballWall.play();
                         break;
                 }
         }
